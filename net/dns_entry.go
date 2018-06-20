@@ -1,4 +1,4 @@
-package chromecast
+package net
 
 import (
 	"log"
@@ -9,7 +9,7 @@ import (
 	"github.com/micro/mdns"
 )
 
-type dnsEntry struct {
+type DNSEntry struct {
 	AddressV4  net.IP
 	AddressV6  net.IP
 	Port       int
@@ -22,14 +22,14 @@ type dnsEntry struct {
 	InfoFields map[string]string
 }
 
-func getAllEntries() []dnsEntry {
+func GetAllEntries() []DNSEntry {
 	entriesChannel := make(chan *mdns.ServiceEntry, 20)
-	resultChannel := make(chan dnsEntry)
-	entries := make([]dnsEntry, 0)
+	resultChannel := make(chan DNSEntry)
+	entries := make([]DNSEntry, 0)
 	go func() {
 		for entry := range entriesChannel {
 			parsedFields := parseInfoFields(entry.InfoFields)
-			resultChannel <- dnsEntry{
+			resultChannel <- DNSEntry{
 				AddressV4:  entry.AddrV4,
 				AddressV6:  entry.AddrV6,
 				Port:       entry.Port,

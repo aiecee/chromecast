@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/mcollinge/chromecast/messages"
+
 	"github.com/mcollinge/chromecast"
 )
 
@@ -17,12 +19,20 @@ func TestGettingDevices(t *testing.T) {
 		}
 		fmt.Printf("%v: %s", i, device.Name)
 
-		err = device.Play("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4")
+		media, err := device.Media()
 		if err != nil {
 			t.Log(err)
 			t.FailNow()
 		}
-		fmt.Println()
-		device.Close()
+		mediaItem := messages.MediaItem{
+			ContentID:   "http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4",
+			StreamType:  "BUFFERED",
+			ContentType: "video/mp4",
+		}
+		_, err = media.Load(mediaItem, 0, true, map[string]interface{}{})
+		if err != nil {
+			t.Log(err)
+			t.FailNow()
+		}
 	}
 }

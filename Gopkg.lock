@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/asaskevich/EventBus"
+  packages = ["."]
+  revision = "d46933a94f05c6657d7b923fcf5ac563ee37ec79"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
   revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
@@ -44,6 +50,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8e19c72ee35075fdec787e35aed0170762d195ad4cd917deaf9ff764c3de192a"
+  inputs-digest = "30d638799fd5aedf4a1560d1cf8477b36786701e95d33656fc6cb7dcc778561a"
   solver-name = "gps-cdcl"
   solver-version = 1
